@@ -10,6 +10,7 @@ Features:
 - Fire/water puddles
 - Smoke puff death animation
 - Exit doors
+- Fans that launch players upward
 - Timer that stops when both players finish
 """
 
@@ -32,7 +33,7 @@ def draw_instructions(surface, font):
     instruction_lines = [
         "Fireboy: A/D to move, W to jump",
         "Watergirl: Left/Right to move, Up to jump",
-        "Players can move through each other",
+        "Stand on fans to get blown upward",
         "Wrong element puddles cause a smoke death reset",
         "Reach the matching doors to stop the timer",
     ]
@@ -62,8 +63,8 @@ def main():
 
     fireboy = Player(
         name="Fireboy",
-        start_x=80,
-        start_y=SCREEN_HEIGHT - 110,
+        start_x=25,
+        start_y=505,
         color=FIREBOY_COLOR,
         controls={
             "left": pygame.K_a,
@@ -75,8 +76,8 @@ def main():
 
     watergirl = Player(
         name="Watergirl",
-        start_x=210,
-        start_y=SCREEN_HEIGHT - 110,
+        start_x=940,
+        start_y=505,
         color=WATERGIRL_COLOR,
         controls={
             "left": pygame.K_LEFT,
@@ -110,6 +111,9 @@ def main():
             for player in players:
                 if not player_finished[player.name]:
                     player.update(pressed_keys, level.platforms)
+
+                    if not player.is_dead:
+                        level.apply_fan_force(player)
 
                     if not player.is_dead and level.check_hazard_collision(player):
                         player.die()
