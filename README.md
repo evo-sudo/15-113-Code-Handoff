@@ -28,10 +28,3 @@ The goal of this project was not to fully complete the game, but to create a cle
   Stores level platforms and hazard layout.
 - `settings.py`  
   Stores constants like screen size, physics values, and colors.
-
-## How to Run
-1. Install Python
-2. Install dependencies:
-
-```bash
-pip install -r requirements.txt
