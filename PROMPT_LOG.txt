@@ -1,0 +1,35 @@
+Prompt 1:
+"Give me starter code for a Fireboy and Watergirl style game with clean structure, classes, and documentation."
+
+
+Prompt 2:
+"Make it so both players can move independently, don’t collide with each other, and add gravity, jumping, and platform collision."
+
+
+Prompt 3:
+"Add hazards (fire and water pools) where the wrong player dies and resets with a smoke animation."
+
+
+Prompt 4:
+"Add doors for each player and a timer that stops when both players reach their matching doors."
+
+
+Prompt 5:
+"Add fans that push the player upward when they stand on them."
+
+
+Prompt 6:
+"Recreate this Fireboy and Watergirl level layout based on a reference image."
+
+
+Prompt 7:
+"Fix the level so players can actually get onto the fans and the gaps are large enough."
+
+
+Prompt 8:
+"Add a timer."
+
+
+Prompt 9:
+"Improve visuals so players look more like Fireboy and Watergirl instead of rectangles and add jumping animation."
+
