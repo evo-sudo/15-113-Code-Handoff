@@ -8,7 +8,7 @@ The goal of this project was not to fully complete the game, but to create a cle
 
 ## Current Features
 - Two playable characters inspired by Fireboy and Watergirl
-- Fireboy uses **WASD**
+- Fireboy uses **WASD** (I KNOW IT'S SWITHED)
 - Watergirl uses **arrow keys**
 - Basic left/right movement
 - Jumping and gravity
