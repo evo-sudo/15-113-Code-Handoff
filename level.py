@@ -3,14 +3,11 @@ level.py
 
 Forest Temple inspired level layout.
 
-This version is built to resemble the provided screenshot:
-- bottom-left Fireboy spawn
-- bottom-right Watergirl spawn
-- side fans that launch upward
-- top ledges
-- middle walkway with doors
-- lower left/right hazard lanes
-- central mound and central island
+This version fixes the side fan opening problem:
+- the opening to the fans is larger
+- fan shelves are easier to reach
+- map stays enclosed
+- fans are strong enough to lift players upward
 """
 
 import pygame
@@ -54,12 +51,12 @@ class Level:
             pygame.Rect(110, 470, 220, 18),
             pygame.Rect(670, 470, 220, 18),
 
-            # middle main walkway
-            pygame.Rect(120, 360, 760, 20),
+            # main middle walkway — shortened so side opening is bigger
+            pygame.Rect(150, 360, 700, 20),
 
-            # slanted supports approximated as short platforms
-            pygame.Rect(155, 345, 40, 15),
-            pygame.Rect(805, 345, 40, 15),
+            # direct walkable fan shelves — lowered slightly
+            pygame.Rect(20, 445, 130, 16),
+            pygame.Rect(850, 445, 130, 16),
 
             # door alcove floors
             pygame.Rect(220, 325, 75, 18),
@@ -80,10 +77,6 @@ class Level:
             # top left and right walkways
             pygame.Rect(70, 145, 260, 18),
             pygame.Rect(670, 145, 260, 18),
-
-            # side fan shelves
-            pygame.Rect(20, 430, 110, 16),
-            pygame.Rect(870, 430, 110, 16),
         ]
 
     def _create_hazards(self):
@@ -118,12 +111,12 @@ class Level:
     def _create_fans(self):
         return [
             {
-                "base_rect": pygame.Rect(35, 416, 70, 14),
-                "air_rect": pygame.Rect(40, 150, 60, 266),
+                "base_rect": pygame.Rect(35, 431, 75, 14),
+                "air_rect": pygame.Rect(30, 145, 85, 286),
             },
             {
-                "base_rect": pygame.Rect(895, 416, 70, 14),
-                "air_rect": pygame.Rect(900, 150, 60, 266),
+                "base_rect": pygame.Rect(890, 431, 75, 14),
+                "air_rect": pygame.Rect(885, 145, 85, 286),
             },
         ]
 
@@ -144,8 +137,8 @@ class Level:
     def apply_fan_force(self, player):
         for fan in self.fans:
             if player.rect.colliderect(fan["air_rect"]):
-                if player.vertical_velocity > -11:
-                    player.vertical_velocity = -11
+                if player.vertical_velocity > -14:
+                    player.vertical_velocity = -14
                 return
 
     def draw_hazard(self, surface, hazard):
@@ -177,7 +170,7 @@ class Level:
         pygame.draw.rect(surface, (25, 25, 25), base_rect, width=2, border_radius=4)
 
         for i in range(5):
-            x = base_rect.x + 8 + i * 10
+            x = base_rect.x + 8 + i * 12
             pygame.draw.line(
                 surface,
                 (200, 200, 200),
@@ -186,7 +179,7 @@ class Level:
                 1,
             )
 
-        for offset in [0, 16, 32]:
+        for offset in [0, 20, 40]:
             pygame.draw.arc(
                 surface,
                 (235, 235, 235),
