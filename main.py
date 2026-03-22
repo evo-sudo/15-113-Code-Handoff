@@ -2,16 +2,6 @@
 main.py
 
 Entry point for the Fireboy and Watergirl starter project.
-
-Features:
-- Two playable characters
-- Non-blocking co-op movement
-- Platforming and collision
-- Fire/water puddles
-- Smoke puff death animation
-- Exit doors
-- Fans that launch players upward
-- Timer that stops when both players finish
 """
 
 import pygame
@@ -63,8 +53,8 @@ def main():
 
     fireboy = Player(
         name="Fireboy",
-        start_x=25,
-        start_y=505,
+        start_x=35,
+        start_y=555,
         color=FIREBOY_COLOR,
         controls={
             "left": pygame.K_a,
@@ -76,8 +66,8 @@ def main():
 
     watergirl = Player(
         name="Watergirl",
-        start_x=940,
-        start_y=505,
+        start_x=930,
+        start_y=555,
         color=WATERGIRL_COLOR,
         controls={
             "left": pygame.K_LEFT,
@@ -125,10 +115,7 @@ def main():
                 game_finished = True
                 final_time_seconds = (pygame.time.get_ticks() - start_time) / 1000
 
-        if game_finished:
-            timer_value = final_time_seconds
-        else:
-            timer_value = (pygame.time.get_ticks() - start_time) / 1000
+        timer_value = final_time_seconds if game_finished else (pygame.time.get_ticks() - start_time) / 1000
 
         screen.fill(BACKGROUND_COLOR)
         level.draw(screen, instruction_font)
@@ -139,9 +126,7 @@ def main():
 
         draw_instructions(screen, instruction_font)
 
-        timer_surface = timer_font.render(
-            f"Time: {format_time(timer_value)}", True, TEXT_COLOR
-        )
+        timer_surface = timer_font.render(f"Time: {format_time(timer_value)}", True, TEXT_COLOR)
         screen.blit(timer_surface, (SCREEN_WIDTH - 180, 20))
 
         if game_finished:

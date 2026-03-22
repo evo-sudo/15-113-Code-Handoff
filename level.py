@@ -1,14 +1,16 @@
 """
 level.py
 
-A more Fireboy-and-Watergirl-inspired sample level.
+Forest Temple inspired level layout.
 
-Features:
-- left/right spawn structure
-- central platforming route
-- elemental pools
-- matching doors
-- fans that launch players upward
+This version is built to resemble the provided screenshot:
+- bottom-left Fireboy spawn
+- bottom-right Watergirl spawn
+- side fans that launch upward
+- top ledges
+- middle walkway with doors
+- lower left/right hazard lanes
+- central mound and central island
 """
 
 import pygame
@@ -29,97 +31,99 @@ class Level:
         self.fans = self._create_fans()
 
     def _create_platforms(self):
-        """
-        Layout inspired by the screenshot:
-        - bottom left/right spawn ledges
-        - central lower mound
-        - middle walkway
-        - upper side structures
-        """
         return [
-            # bottom spawn ledges
-            pygame.Rect(0, 560, 120, 90),
-            pygame.Rect(880, 560, 120, 90),
+            # outer frame
+            pygame.Rect(0, 0, SCREEN_WIDTH, 20),
+            pygame.Rect(0, 0, 20, SCREEN_HEIGHT),
+            pygame.Rect(SCREEN_WIDTH - 20, 0, 20, SCREEN_HEIGHT),
 
-            # lower side ledges above spawn
-            pygame.Rect(80, 500, 180, 18),
-            pygame.Rect(740, 500, 180, 18),
+            # bottom outer spawn blocks
+            pygame.Rect(20, 560, 120, 90),
+            pygame.Rect(860, 560, 120, 90),
 
-            # central mound
-            pygame.Rect(360, 520, 280, 18),
-            pygame.Rect(390, 485, 220, 18),
-            pygame.Rect(420, 450, 160, 18),
+            # bottom left/right hazard lanes
+            pygame.Rect(140, 610, 210, 18),
+            pygame.Rect(650, 610, 210, 18),
 
-            # middle long walkway
-            pygame.Rect(100, 360, 800, 20),
+            # lower middle mound
+            pygame.Rect(360, 575, 280, 18),
+            pygame.Rect(390, 540, 220, 18),
+            pygame.Rect(430, 505, 140, 18),
 
-            # door ledges
-            pygame.Rect(220, 325, 90, 18),
-            pygame.Rect(690, 325, 90, 18),
+            # middle lower hazard ledges
+            pygame.Rect(110, 470, 220, 18),
+            pygame.Rect(670, 470, 220, 18),
 
-            # center upper island
-            pygame.Rect(430, 265, 140, 18),
+            # middle main walkway
+            pygame.Rect(120, 360, 760, 20),
 
-            # upper left structure
-            pygame.Rect(90, 145, 200, 18),
-            pygame.Rect(210, 145, 18, 180),
+            # slanted supports approximated as short platforms
+            pygame.Rect(155, 345, 40, 15),
+            pygame.Rect(805, 345, 40, 15),
 
-            # upper right structure
-            pygame.Rect(710, 145, 200, 18),
-            pygame.Rect(772, 145, 18, 180),
+            # door alcove floors
+            pygame.Rect(220, 325, 75, 18),
+            pygame.Rect(705, 325, 75, 18),
 
-            # small upper puddle ledges
-            pygame.Rect(255, 250, 90, 16),
-            pygame.Rect(655, 250, 90, 16),
+            # central island / statue base approximation
+            pygame.Rect(445, 300, 110, 18),
+            pygame.Rect(470, 265, 60, 18),
+
+            # upper inner puddle ledges
+            pygame.Rect(250, 255, 95, 16),
+            pygame.Rect(655, 255, 95, 16),
+
+            # upper vertical shafts
+            pygame.Rect(205, 145, 18, 180),
+            pygame.Rect(777, 145, 18, 180),
+
+            # top left and right walkways
+            pygame.Rect(70, 145, 260, 18),
+            pygame.Rect(670, 145, 260, 18),
+
+            # side fan shelves
+            pygame.Rect(20, 430, 110, 16),
+            pygame.Rect(870, 430, 110, 16),
         ]
 
     def _create_hazards(self):
-        """
-        Elemental pools.
-        These are meant to sit in open spaces between usable platforms,
-        so they feel more like hazards in gaps rather than paint on top.
-        """
         return [
-            # bottom pools
-            {"rect": pygame.Rect(120, 610, 180, 22), "type": "fire"},
-            {"rect": pygame.Rect(700, 610, 180, 22), "type": "water"},
+            # bottom elemental pools
+            {"rect": pygame.Rect(140, 615, 210, 18), "type": "fire"},
+            {"rect": pygame.Rect(650, 615, 210, 18), "type": "water"},
 
-            # middle pools
-            {"rect": pygame.Rect(150, 430, 160, 20), "type": "water"},
-            {"rect": pygame.Rect(690, 430, 160, 20), "type": "fire"},
+            # middle elemental pools
+            {"rect": pygame.Rect(120, 475, 200, 16), "type": "water"},
+            {"rect": pygame.Rect(680, 475, 200, 16), "type": "fire"},
 
-            # upper small pools
-            {"rect": pygame.Rect(260, 266, 80, 14), "type": "fire"},
-            {"rect": pygame.Rect(660, 266, 80, 14), "type": "water"},
+            # small upper elemental pools
+            {"rect": pygame.Rect(255, 260, 85, 12), "type": "fire"},
+            {"rect": pygame.Rect(660, 260, 85, 12), "type": "water"},
         ]
 
     def _create_doors(self):
         return [
             {
-                "rect": pygame.Rect(235, 300, 42, 60),
+                "rect": pygame.Rect(232, 300, 42, 60),
                 "type": "fire",
                 "label": "F",
             },
             {
-                "rect": pygame.Rect(705, 300, 42, 60),
+                "rect": pygame.Rect(717, 300, 42, 60),
                 "type": "water",
                 "label": "W",
             },
         ]
 
     def _create_fans(self):
-        """
-        Fans are rectangles the player can stand on.
-        The air column above them launches players upward.
-        """
         return [
             {
-                "base_rect": pygame.Rect(10, 485, 70, 15),
-                "air_rect": pygame.Rect(15, 250, 60, 235),
+                "base_rect": pygame.Rect(35, 416, 70, 14),
+                "air_rect": pygame.Rect(40, 150, 60, 266),
             },
             {
-                "base_rect": pygame.Rect(920, 485, 70, 15),
-                "air_rect": pygame.Rect(925, 250, 60, 235),
+                "base_rect": pygame.Rect(895, 416, 70, 14),
+                "air_rect": pygame.Rect(900, 150, 60, 266),
             },
         ]
 
@@ -138,14 +142,10 @@ class Level:
         return False
 
     def apply_fan_force(self, player):
-        """
-        If the player is inside a fan's air column, launch them upward.
-        """
         for fan in self.fans:
             if player.rect.colliderect(fan["air_rect"]):
-                # Strong upward push; only override if falling or moving slowly upward
-                if player.vertical_velocity > -8:
-                    player.vertical_velocity = -8
+                if player.vertical_velocity > -11:
+                    player.vertical_velocity = -11
                 return
 
     def draw_hazard(self, surface, hazard):
@@ -154,10 +154,8 @@ class Level:
         highlight_color = (255, 200, 120) if hazard["type"] == "fire" else (180, 230, 255)
 
         pygame.draw.ellipse(surface, main_color, rect)
-
-        inner_rect = pygame.Rect(rect.x + 8, rect.y + 3, rect.width - 16, rect.height - 7)
+        inner_rect = pygame.Rect(rect.x + 8, rect.y + 2, rect.width - 16, rect.height - 5)
         pygame.draw.ellipse(surface, highlight_color, inner_rect)
-
         pygame.draw.arc(surface, (40, 30, 20), rect, 0, 3.14, 2)
 
     def draw_door(self, surface, font, door):
@@ -175,27 +173,24 @@ class Level:
         base_rect = fan["base_rect"]
         air_rect = fan["air_rect"]
 
-        # fan base
         pygame.draw.rect(surface, (70, 70, 70), base_rect, border_radius=4)
         pygame.draw.rect(surface, (25, 25, 25), base_rect, width=2, border_radius=4)
 
-        # simple fan grill lines
-        for i in range(6):
+        for i in range(5):
             x = base_rect.x + 8 + i * 10
             pygame.draw.line(
                 surface,
                 (200, 200, 200),
-                (x, base_rect.y + 3),
-                (x, base_rect.y + base_rect.height - 3),
+                (x, base_rect.y + 2),
+                (x, base_rect.y + base_rect.height - 2),
                 1,
             )
 
-        # air stream
-        for offset in [0, 18, 36]:
+        for offset in [0, 16, 32]:
             pygame.draw.arc(
                 surface,
                 (235, 235, 235),
-                pygame.Rect(air_rect.x + offset, air_rect.y + 20, 18, 80),
+                pygame.Rect(air_rect.x + offset, air_rect.y + 10, 18, 90),
                 1.2,
                 5.1,
                 2,
@@ -203,7 +198,15 @@ class Level:
             pygame.draw.arc(
                 surface,
                 (235, 235, 235),
-                pygame.Rect(air_rect.x + offset, air_rect.y + 100, 18, 80),
+                pygame.Rect(air_rect.x + offset, air_rect.y + 105, 18, 90),
+                1.2,
+                5.1,
+                2,
+            )
+            pygame.draw.arc(
+                surface,
+                (235, 235, 235),
+                pygame.Rect(air_rect.x + offset, air_rect.y + 200, 18, 90),
                 1.2,
                 5.1,
                 2,

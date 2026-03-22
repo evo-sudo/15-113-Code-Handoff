@@ -13,7 +13,7 @@ WINDOW_TITLE = "Fireboy and Watergirl - Starter"
 GRAVITY = 0.55
 MOVE_SPEED = 5
 JUMP_STRENGTH = 13
-MAX_FALL_SPEED = 12
+MAX_FALL_SPEED = 14
 
 # Player dimensions
 PLAYER_WIDTH = 36
