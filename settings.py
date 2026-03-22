@@ -2,8 +2,6 @@
 settings.py
 
 Stores constants used across the game so they are easy to update in one place.
-This makes tuning movement, gravity, colors, and screen size much easier for
-whoever continues the project later.
 """
 
 SCREEN_WIDTH = 1000
@@ -12,14 +10,14 @@ FPS = 60
 WINDOW_TITLE = "Fireboy and Watergirl - Starter"
 
 # Physics
-GRAVITY = 0.6
+GRAVITY = 0.55
 MOVE_SPEED = 5
-JUMP_STRENGTH = 12
+JUMP_STRENGTH = 13
 MAX_FALL_SPEED = 12
 
 # Player dimensions
-PLAYER_WIDTH = 40
-PLAYER_HEIGHT = 55
+PLAYER_WIDTH = 36
+PLAYER_HEIGHT = 52
 
 # Colors
 BACKGROUND_COLOR = (30, 30, 40)

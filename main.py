@@ -75,7 +75,7 @@ def main():
 
     watergirl = Player(
         name="Watergirl",
-        start_x=150,
+        start_x=210,
         start_y=SCREEN_HEIGHT - 110,
         color=WATERGIRL_COLOR,
         controls={
