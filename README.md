@@ -7,15 +7,15 @@ I chose to build a starter version of **Fireboy and Watergirl** in Python using 
 The goal of this project was not to fully complete the game, but to create a clean, readable, and well-documented starting point that another student could realistically inherit and continue.
 
 ## Current Features
-- Two playable characters:
-  - Fireboy uses **WASD**
-  - Watergirl uses **arrow keys**
+- Two playable characters inspired by Fireboy and Watergirl
+- Fireboy uses **WASD**
+- Watergirl uses **arrow keys**
 - Basic left/right movement
 - Jumping and gravity
 - Platform collision
-- Players do **not** collide with or block each other
-- Simple elemental hazards
-- Player reset when touching the opposite element
+- Players do **not** block each other
+- Fire and water puddles / lava pits
+- Touching the opposite element causes a smoke-puff death reset
 - Matching fire and water exit doors
 - On-screen timer that stops when both players finish
 

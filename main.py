@@ -3,13 +3,14 @@ main.py
 
 Entry point for the Fireboy and Watergirl starter project.
 
-Current scope:
+Features:
 - Two playable characters
-- Basic platforming movement
-- Gravity and collision
-- Simple hazards that reset the player
-- Exit doors for both players
-- On-screen timer that stops when both players finish
+- Non-blocking co-op movement
+- Platforming and collision
+- Fire/water puddles
+- Smoke puff death animation
+- Exit doors
+- Timer that stops when both players finish
 """
 
 import pygame
@@ -31,8 +32,9 @@ def draw_instructions(surface, font):
     instruction_lines = [
         "Fireboy: A/D to move, W to jump",
         "Watergirl: Left/Right to move, Up to jump",
-        "Players do not block each other",
-        "Reach the matching doors to finish",
+        "Players can move through each other",
+        "Wrong element puddles cause a smoke death reset",
+        "Reach the matching doors to stop the timer",
     ]
 
     for index, line in enumerate(instruction_lines):
@@ -61,7 +63,7 @@ def main():
     fireboy = Player(
         name="Fireboy",
         start_x=80,
-        start_y=SCREEN_HEIGHT - 120,
+        start_y=SCREEN_HEIGHT - 110,
         color=FIREBOY_COLOR,
         controls={
             "left": pygame.K_a,
@@ -73,8 +75,8 @@ def main():
 
     watergirl = Player(
         name="Watergirl",
-        start_x=160,
-        start_y=SCREEN_HEIGHT - 120,
+        start_x=150,
+        start_y=SCREEN_HEIGHT - 110,
         color=WATERGIRL_COLOR,
         controls={
             "left": pygame.K_LEFT,
@@ -109,10 +111,10 @@ def main():
                 if not player_finished[player.name]:
                     player.update(pressed_keys, level.platforms)
 
-                    if level.check_hazard_collision(player):
-                        player.reset_to_spawn()
+                    if not player.is_dead and level.check_hazard_collision(player):
+                        player.die()
 
-                    if level.check_door_collision(player):
+                    if not player.is_dead and level.check_door_collision(player):
                         player_finished[player.name] = True
 
             if all(player_finished.values()):
